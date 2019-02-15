@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Promesa</title>
+  <link rel="stylesheet" href="CSS/calcu.css">
+  </head>
+  <body>
+    <div class="hola">
+      <input type="text" id="cal" placeholder="Dijite un numero">
+    <tr>
+      <td> <button type="button" name="C">C</button> </td>
+      <td> <button type="button" name="CE">CE</button> </td>
+      <td> <button type="button" name="borrar"> B </button> </td>
+      <td> <button type="button" id="div" onclick="signo('/')">/</button> </td>
+    </tr>
+    <br>
+    <br>
+    <tr>
+      <td> <button type="button" name="7" onclick="concatenar('7')">7</button> </td>
+      <td> <button type="button" name="8" onclick="concatenar('8')">8</button> </td>
+      <td> <button type="button" name="9" onclick="concatenar('9')">9</button> </td>
+      <td> <button type="button"  id="mul" onclick="signo('*')">*</button> </td>
+    </tr>
+    <br>
+    <br>
+    <tr>
+      <td> <button type="button" name="4" onclick="concatenar('4')">4</button> </td>
+      <td> <button type="button" name="5" onclick="concatenar('5')">5</button> </td>
+      <td> <button type="button" name="6" onclick="concatenar('6')">6</button> </td>
+      <td> <button type="button"  id="res" onclick="signo('-')">-</button> </td>
+    </tr>
+    <br>
+    <br>
+    <tr>
+      <td> <button type="button" name="1" onclick="concatenar('1')">1</button> </td>
+      <td> <button type="button" name="2" onclick="concatenar('2')">2</button> </td>
+      <td> <button type="button" name="3" onclick="concatenar('3')">3</button> </td>
+      <td> <button type="button"  id="sum" onclick="signo('+')">+</button> </td>
+    </tr>
+    <br>
+    <br>
+    <tr>
+      <td> <button type="button" id="ne" onclick="nega()">+/-</button> </td>
+      <td> <button type="button" name="0" onclick="concatenar('0')">0</button> </td>
+      <td> <button type="button" name="coma" onclick="co()">,</button> </td>
+      <td> <button type="button"  id="res" onclick="resul()">=</button> </td>
+    </tr>
+      </div>
+      <script type="text/javascript">
+        class Operacion {
+          constructor(_numero1,_numero2) {
+            this.numero1=parseInt(_numero1);
+            this.numero2=parseInt(_numero2);
+          }
+          suma(){
+            let objetoutilizar=this;
+            return new Promise(function (resolve,reject){
+              try {
+                resolve(objetoutilizar.numero1+objetoutilizar.numero2);
+              } catch (err) {
+                reject(err.message);
+              }
+            })
+          }
+          resta(){
+            let objetoutilizar=this;
+            return new Promise(function (resolve,reject){
+              try {
+                resolve(objetoutilizar.numero1-objetoutilizar.numero2);
+              } catch (err) {
+                reject(err.message);
+              }
+            })
+          }
+          multiplicar(){
+            let objetoutilizar=this;
+            return new Promise(function (resolve,reject){
+              try {
+                resolve(objetoutilizar.numero1*objetoutilizar.numero2);
+              } catch (err) {
+                reject(err.message);
+              }
+            })
+          }
+          dividir(){
+            let objetoutilizar=this;
+            return new Promise(function (resolve,reject){
+              try {
+                resolve(objetoutilizar.numero1/objetoutilizar.numero2);
+              } catch (err) {
+                reject(err.message);
+              }
+            })
+          }
+        }
+        let tiposigno='';
+        let numero1=0;
+        let numero2=0;
+
+        function concatenar(n){
+          document.getElementById('cal').value=document.getElementById('cal').value+n;
+        }
+        function signo(s){
+          tiposigno=s;
+          numero1=document.getElementById('cal').value;
+          document.getElementById('cal').value='';
+        }
+        function resul(){
+          //onclick boton igual//
+          numero2=document.getElementById('cal').value;
+          let claseoperacioninstanciada=new Operacion(numero1,numero2);
+          switch (tiposigno) {
+            case "+":
+            document.getElementById('cal').value=claseoperacioninstanciada.sumar().then(function(response){
+              document.getElementById('cal').value=response;
+            },function(error){
+              document.getElementById('cal').value='Hizo algo mal';
+            });
+              break;
+              case "-":
+              document.getElementById('cal').value=claseoperacioninstanciada.resta().then(function(response){
+                document.getElementById('cal').value=response;
+              },function(error){
+                document.getElementById('cal').value='Hizo algo mal';
+              });
+                break;
+                  case "*":
+                  document.getElementById('cal').value=claseoperacioninstanciada.multiplicar().then(function(response){
+                    document.getElementById('cal').value=response;
+                  },function(error){
+                    document.getElementById('cal').value='Hizo algo mal';
+                  });
+                  break;
+                  case "/":
+                  document.getElementById('cal').value=claseoperacioninstanciada.dividir().then(function(response){
+                    document.getElementById('cal').value=response;
+                  },function(error){
+                    document.getElementById('cal').value='Hizo algo mal';
+                  });
+                    break;
+        }
+      }
+      </script>
+  </body>
+</html>

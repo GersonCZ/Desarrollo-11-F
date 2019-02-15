@@ -1,0 +1,38 @@
+body{
+  background: rgba(#ffffff, 0.76);
+}
+.hola{
+  background: #000000;
+  margin:240px;
+  width: 270px;
+  height: 50%;
+  border-radius: 10px;
+}
+td{
+  position: absolute;
+  margin: auto;
+  background: #89e38a;
+}
+button{
+  background: #5e5e55;
+  width: 60px;
+  height: 25px;
+  margin: 2px;
+  color: #ffffff;
+  font-family: Arial;
+  border-radius: 50px;
+  font-style: italic;
+  font-size: 15px;
+  border-color: #ffffff;
+}
+input{
+  background: #dd910f;
+  width: 266px;
+  height: 60px;
+  color: #ffffff;
+  font-family: Arial;
+  font-style: normal;
+  font-size: 25px;
+  border-color: #000000;
+
+}
